@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-import CoverPage from './components/coverPage';
+import CoverPage from "./components/CoverPage";
 
 function App() {
   return <CoverPage />
