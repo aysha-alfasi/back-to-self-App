@@ -16,3 +16,52 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+button {
+    background-color: #F2C6FF;
+    color: #6E3500;
+    font-family: 'Darumadrop One', sans-serif;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+min-width: 220px;
+ text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  button:hover {
+    background-color: #6a4c93
+    ;
+    transform: scale(1.03);
+    color:antiquewhite;
+  }
+
+  .backButton {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #b8e6c1;
+    color: #2e4e3f;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 16px;
+    font-family: 'Darumadrop One', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    min-width: 80px;
+  }
+  
+  .backButton:hover {
+    background-color: #a1d9ae;
+    transform: translateX(-2px);
+    color: #2e4e3f;
+  }
+  

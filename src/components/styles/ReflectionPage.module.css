@@ -1,0 +1,56 @@
+.reflectionEditor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+  
+  .writingArea {
+    margin-top: 10%;
+    width: 100%;
+    max-width: 600px;
+    min-height: 400px;
+    font-size: 1.2rem;
+    font-family: 'Darumadrop One', sans-serif;
+    background-color: #fffaf3;
+    padding: 1.5rem;
+    border-radius: 16px;
+    position: relative;
+    outline: none;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    direction: ltr;
+    text-align: left;
+  }
+  
+  .writingArea:empty::before {
+    content: attr(data-placeholder);
+    color: #bbb;
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    pointer-events: none;
+  }
+  
+  .backButton {
+    align-self: flex-start;
+    margin-bottom: 1rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+  }
+  
+  .saveButton {
+    margin-top: 1.5rem;
+    background-color: #f7caca;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+  }
+  

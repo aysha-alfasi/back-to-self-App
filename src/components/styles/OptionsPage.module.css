@@ -1,0 +1,29 @@
+.optionsPage {
+    background-image: url(../../imgs//pagesBackground.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    height: 100vh;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+
+.buttons {
+    padding-top: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+    text-align: center;
+  }
+  
+  

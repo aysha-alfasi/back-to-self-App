@@ -1,0 +1,39 @@
+.section {
+    margin-top: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    font-family: "Darumadrop One", cursive;
+    font-size: 1.5rem;
+    color: #5c4033;
+}
+
+
+.highlightedText {
+    position: relative;
+    display: inline-block;
+    font-family: 'Darumadrop One', sans-serif;
+    font-size: 1.8rem;
+    color: #5c4033;
+    z-index: 1;
+    text-align: center;
+    padding: 0 0.2em;
+
+  }
+  
+  .highlightedText::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -5%;
+    width:110%;
+    height: 30rem;
+    background: url('../../imgs/marker.png') center/contain no-repeat;
+    transform: translateY(-50%);
+    z-index: -1;
+    opacity: 0.8;
+    pointer-events: none;
+
+  }
+  
