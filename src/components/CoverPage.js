@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import classes from "../components/styles/CoverPage.module.css";
 import flowers from "../imgs/mainPageFlowers.png";
 import cloud from "../imgs/cloud3.png";
@@ -10,13 +11,20 @@ function CoverPage({ onDiveIn }) {
       </div>
 
       <div className={classes.titleAndButton}>
-        <h1 className={classes.mainTitle}>
+        <motion.h1
+          className={classes.mainTitle}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: [0.42, 0, 0.58, 1] }}
+        >
           Back
           <br />
           to self
-        </h1>
+        </motion.h1>
 
-        <button className={classes.startButton} onClick={onDiveIn}>Dive in</button>
+        <button className={classes.startButton} onClick={onDiveIn}>
+          Dive in
+        </button>
       </div>
       <img src={flowers} className={classes.flowerDecor} alt="flowers" />
     </div>

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import classes from "../components/styles/ReflectionPage.module.css";
 
-export default function ReflectionWritingArea({ onSave, goBack }) {
+export default function ReflectionWritingArea({ onSave }) {
   const contentRef = useRef(null);
 
   const handleSaveClick = () => {
@@ -14,10 +14,6 @@ export default function ReflectionWritingArea({ onSave, goBack }) {
 
   return (
     <div className={classes.reflectionEditor}>
-      <button className="backButton" onClick={goBack}>
-        ← Back
-      </button>
-
       <div
         className={classes.writingArea}
         contentEditable

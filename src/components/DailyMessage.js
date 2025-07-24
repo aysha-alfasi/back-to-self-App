@@ -1,24 +1,20 @@
+import { useEffect } from "react";
 import classes from "../components/styles/NewMessage.module.css";
 
-export default function DailyMessage({
-  dailyMessage,
-  generateMessage,
-  goBack,
-}) {
+export default function DailyMessage({ dailyMessage, generateMessage }) {
+  useEffect(() => {
+    if (!dailyMessage) {
+      generateMessage();
+    }
+  }, [dailyMessage, generateMessage]);
+
   return (
     <div className={classes.section}>
-      <button className="backButton" onClick={goBack}>
-        ← Back{" "}
-      </button>
       {dailyMessage ? (
-  <h2 className={classes.highlightedText}>{dailyMessage}</h2>
-) : (
-  <h2>Click once you're ready!</h2>
-)}
-
-      <button className={classes.btn} onClick={generateMessage}>
-        Check Today's Message✨
-      </button>
+        <h2 className={classes.highlightedText}>{dailyMessage}</h2>
+      ) : (
+        <h2>Generating your message!</h2>
+      )}
     </div>
   );
 }

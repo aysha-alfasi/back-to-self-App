@@ -40,7 +40,8 @@ min-width: 220px;
   }
 
   .backButton {
-    position: absolute;
+    position: relative;
+    z-index: 10;
     top: 20px;
     left: 20px;
     background-color: #b8e6c1;
@@ -57,11 +58,13 @@ min-width: 220px;
     gap: 8px;
     transition: background-color 0.3s ease, transform 0.2s ease;
     min-width: 80px;
+
   }
   
   .backButton:hover {
     background-color: #a1d9ae;
     transform: translateX(-2px);
     color: #2e4e3f;
+
   }
   
