@@ -5,6 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #FDF1FF;
+    background-image: 
+/*     linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px); */
+  radial-gradient(rgba(0,0,0,0.1) 1px, transparent 1px);
+
+  background-size: 1.5em 1.5em;
 }
 
 html, body {
@@ -67,4 +74,7 @@ min-width: 220px;
     color: #2e4e3f;
 
   }
+  
+
+
   

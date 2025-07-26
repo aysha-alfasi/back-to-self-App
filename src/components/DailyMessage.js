@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import classes from "../components/styles/NewMessage.module.css";
 
 export default function DailyMessage({ dailyMessage, generateMessage }) {
+
   useEffect(() => {
-    if (!dailyMessage) {
-      generateMessage();
-    }
-  }, [dailyMessage, generateMessage]);
+    generateMessage();
+  }, [generateMessage]);
+  
 
   return (
     <div className={classes.section}>

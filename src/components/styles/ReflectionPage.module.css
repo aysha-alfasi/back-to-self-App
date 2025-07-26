@@ -54,3 +54,16 @@
     color: #333;
   }
   
+.successMessage {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.okModal {
+  margin-bottom: 1rem;
+  background-color: #f7caca !important;
+}
+
+.okModal:hover {
+  background-color: #6a4c93 !important;
+}

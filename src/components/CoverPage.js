@@ -3,7 +3,17 @@ import classes from "../components/styles/CoverPage.module.css";
 import flowers from "../imgs/mainPageFlowers.png";
 import cloud from "../imgs/cloud3.png";
 
+const playPageFlipSound = () => {
+  const audio = new Audio("/sounds/openBook.mp3");
+  audio.play();
+};
+
 function CoverPage({ onDiveIn }) {
+  const handleClick = () => {
+    playPageFlipSound();
+    onDiveIn();
+  };
+
   return (
     <div className={classes.page}>
       <div className={classes.cloudWrapper}>
@@ -22,7 +32,7 @@ function CoverPage({ onDiveIn }) {
           to self
         </motion.h1>
 
-        <button className={classes.startButton} onClick={onDiveIn}>
+        <button className={classes.startButton} onClick={handleClick}>
           Dive in
         </button>
       </div>

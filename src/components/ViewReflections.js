@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import CustomModal from "./UI/CustomModal";
 import classes from "../components/styles/ViewReflections.module.css";
 
 export default function ViewReflections({
@@ -6,69 +7,201 @@ export default function ViewReflections({
   deleteReflection,
   editReflection,
 }) {
-  const [editingIndex, setEditingIndex] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalType, setModalType] = useState("");
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState("");
+  const [originalText, setOriginalText] = useState("");
 
-  const startEditing = (index, item) => {
-    setEditingIndex(index);
-    setEditedText(item.text);
+
+  const editRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing && editRef.current) {
+      editRef.current.innerText = editedText;
+    }
+  }, [isEditing, editedText]);
+
+  const handleReadMore = (index) => {
+    setActiveIndex(index);
+    setEditedText(reflections[index].text);
+    setIsModalOpen(true);
+    setIsEditing(false);
+    setModalType("view");
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setActiveIndex(null);
+    setIsEditing(false);
+    setEditedText("");
+    setModalType("");
+  };
+
+  const startEditingInModal = () => {
+    setIsEditing(true);
+  };
+
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setEditedText(reflections[activeIndex].text);
   };
 
   const saveEdit = () => {
-    if (editedText.trim()) {
-      editReflection(editingIndex, editedText.trim());
-      setEditingIndex(null);
-      setEditedText("");
+    if (!editRef.current) return;
+    const newText = editRef.current.innerText.trim();
+    if (!newText) {
+      setModalType("emptyEdit");
+      return;
     }
+
+    if (newText === originalText) {
+      setModalType("noChanges");
+      setIsModalOpen(true);
+      return;
+    }
+
+
+ 
+setOriginalText(newText);
+setEditedText(newText);
+    setIsEditing(false);
+    setModalType("confirmEdit");
+
+    editReflection(activeIndex, newText);
+
+  };
+
+  const confirmDelete = () => {
+    setModalType("confirmDelete");
+  };
+
+  const handleDelete = () => {
+    deleteReflection(activeIndex);
+    setModalType("deleteSuccess");
+    setIsEditing(false);
   };
 
   return (
     <div className={classes.viewContainer}>
-      <h2 className={classes.title}>Your Reflections</h2>
-
       <div className={classes.reflectionList}>
         {reflections && reflections.length > 0 ? (
           reflections.map((item, index) => (
             <div key={index} className={classes.reflectionCard}>
-              {editingIndex === index ? (
-                <>
-                  <div
-                    className={classes.editableDiv}
-                    contentEditable
-                    suppressContentEditableWarning={true}
-                    onInput={(e) => setEditedText(e.currentTarget.innerText)}
-                  >
-                    {editedText}
-                  </div>
-                  <button onClick={saveEdit} className={classes.saveButton}>
-                    Save
-                  </button>
-                </>
-              ) : (
-                <>
-                  <p>{item.text}</p>
-                  <div className={classes.buttonGroup}>
-                    <button
-                      onClick={() => startEditing(index, item)}
-                      className={classes.editButton}
-                    >
-                    Edit
-                    </button>
-                    <button
-                      onClick={() => deleteReflection(index)}
-                      className={classes.deleteButton}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </>
-              )}
+              <p className={classes.previewText}>
+                {item.text.split("\n")[0].slice(0, 20)}...
+              </p>
+              <div className={classes.buttonGroup}>
+                <button
+                  onClick={() => handleReadMore(index)}
+                  className={classes.readMoreButton}
+                >
+                  Read more
+                </button>
+                <button
+                  onClick={() => {
+                    setActiveIndex(index);
+                    confirmDelete();
+                    setIsModalOpen(true);
+                  }}
+                  className={classes.deleteButton}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))
         ) : (
           <p className={classes.emptyMessage}>No reflections yet.</p>
         )}
       </div>
+
+      {isModalOpen && (
+        <CustomModal onClose={closeModal}>
+          {modalType === "view" &&
+            activeIndex !== null &&
+            (!isEditing ? (
+              <>
+                <div className={classes.fullText}>
+                  {reflections[activeIndex].text}
+                </div>
+                <div className={classes.modalButtons}>
+                  <button onClick={startEditingInModal}>Edit</button>
+                  <button onClick={confirmDelete}>Delete</button>
+                  <button onClick={closeModal}>Close</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  className={classes.editableDiv}
+                  contentEditable
+                  ref={editRef}
+                  data-placeholder="Edit your reflection..."
+                  suppressContentEditableWarning={true}
+                />
+                <div className={classes.modalButtons}>
+                  <button onClick={saveEdit} className={classes.saveButton}>
+                    Save
+                  </button>
+                  <button
+                    onClick={cancelEditing}
+                    className={classes.cancelButton}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
+            ))}
+
+          {modalType === "confirmDelete" && (
+            <div className={classes.modalMessage}>
+              <p>Are you sure you want to delete this reflection?</p>
+              <div className={classes.modalButtons}>
+                <button onClick={handleDelete}>Yes, delete</button>
+                <button onClick={closeModal}>Cancel</button>
+              </div>
+            </div>
+          )}
+
+          {modalType === "deleteSuccess" && (
+            <div className={classes.modalMessage}>
+              <p>Reflection deleted successfully! 🗑️</p>
+              <div className={classes.modalButtons}>
+                <button onClick={closeModal}>Close</button>
+              </div>
+            </div>
+          )}
+
+          {modalType === "emptyEdit" && (
+            <div className={classes.modalMessage}>
+              <p>You cannot save an empty reflection!</p>
+              <div className={classes.modalButtons}>
+                <button onClick={() => setModalType("view")}>Back</button>
+              </div>
+            </div>
+          )}
+
+{modalType === "noChanges" && (
+            <div className={classes.modalMessage}>
+              <p>You didn't make any changes 😊</p>
+              <div className={classes.modalButtons}>
+                <button onClick={closeModal}>ok</button>
+              </div>
+            </div>
+          )}
+
+          {modalType === "confirmEdit" && (
+            <div className={classes.modalMessage}>
+              <p>Your reflection was updated successfully!</p>
+              <div className={classes.modalButtons}>
+                <button onClick={closeModal}>Close</button>
+              </div>
+            </div>
+          )}
+        </CustomModal>
+      )}
     </div>
   );
 }
