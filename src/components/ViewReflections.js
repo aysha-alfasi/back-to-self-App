@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import CustomModal from "./UI/CustomModal";
 import classes from "../components/styles/ViewReflections.module.css";
+
+
+
+const playPageFlipSound = () => {
+  const audio = new Audio("/sounds/openBook.mp3");
+  audio.play();
+};
 
 export default function ViewReflections({
   reflections,
@@ -28,6 +36,7 @@ export default function ViewReflections({
     setEditedText(reflections[index].text);
     setIsModalOpen(true);
     setIsEditing(false);
+    playPageFlipSound();
     setModalType("view");
   };
 
@@ -35,11 +44,13 @@ export default function ViewReflections({
     setIsModalOpen(false);
     setActiveIndex(null);
     setIsEditing(false);
+    playPageFlipSound();
     setEditedText("");
     setModalType("");
   };
 
   const startEditingInModal = () => {
+    setOriginalText(reflections[activeIndex].text);
     setIsEditing(true);
   };
 
@@ -116,7 +127,7 @@ setEditedText(newText);
           <p className={classes.emptyMessage}>No reflections yet.</p>
         )}
       </div>
-
+      <AnimatePresence>
       {isModalOpen && (
         <CustomModal onClose={closeModal}>
           {modalType === "view" &&
@@ -202,6 +213,8 @@ setEditedText(newText);
           )}
         </CustomModal>
       )}
+      </AnimatePresence>
+
     </div>
   );
 }

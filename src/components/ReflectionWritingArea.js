@@ -2,7 +2,12 @@ import { useRef, useState } from "react";
 import CustomModal from "../components/UI/CustomModal";
 import classes from "../components/styles/ReflectionPage.module.css";
 
-export default function ReflectionWritingArea({ onSave }) {
+const playPageFlipSound = () => {
+  const audio = new Audio("/sounds/openBook.mp3");
+  audio.play();
+};
+
+export default function ReflectionWritingArea({ onSave, goBack }) {
   const [showModal, setShowModal] = useState(false);
 
   const contentRef = useRef(null);
@@ -12,8 +17,8 @@ export default function ReflectionWritingArea({ onSave }) {
     if (text) {
       onSave(text);
       contentRef.current.innerText = "";
+      playPageFlipSound();
       setShowModal(true);
-      setTimeout(() => setShowModal(false), 3000);
     }
   };
 
@@ -40,6 +45,9 @@ export default function ReflectionWritingArea({ onSave }) {
           <p className={classes.successMessage}>Your Reflection is added 🌸</p>
           <button className={classes.okModal} onClick={closeModal}>
             Ok
+          </button>
+          <button className={classes.okModal} onClick={goBack}>
+            Go home
           </button>
         </CustomModal>
       )}

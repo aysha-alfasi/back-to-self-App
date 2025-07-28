@@ -1,8 +1,9 @@
 .page {
-  min-height: 100vh;
+  min-height: 100dvh;
   position: relative;
   background-image: url(../../imgs/appSky.png);
   background-size: cover;
+  background-color: #ffcd9aff;
   background-repeat: repeat-y;
   background-position: center;
   display: flex;
@@ -110,4 +111,121 @@
 .startButton:hover {
   background-color: #4b2e2e;
   color: #fff8f0;
+}
+
+@media (min-width: 768px) {
+  .page {
+    max-width: 500px;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background-image: url(../../imgs/appSkyBig.png);
+    background-size: cover;
+    background-repeat: repeat-y;
+    background-position: center;
+
+    min-height: auto;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+  }
+
+  .cloudWrapper {
+    position: absolute;
+    bottom: 100%;
+    left: 60px;
+    width: 10%;
+    height: auto;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .cloud {
+    position: relative;
+    opacity: 0.5;
+    width: 500px;
+    animation: floatCloud2 60s linear infinite;
+  }
+}
+
+@keyframes floatCloud2 {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Nest Hub  */
+
+@media (min-aspect-ratio: 4/3) and (max-width: 1300px) {
+  .flowerDecor {
+    max-width: 230px;
+  }
+
+  .cloudWrapper {
+    bottom: -10%;
+  }
+
+  .cloud {
+    width: 290px;
+  }
+}
+
+/* Nest Hub Max */
+
+@media (device-width: 1280px) and (device-height: 800px) {
+  .flowerDecor {
+    max-width: 300px;
+  }
+
+  .cloudWrapper {
+    bottom: -1%;
+  }
+
+  .cloud {
+    width: 370px;
+  }
+}
+
+/* Surface Duo */
+
+@media (max-width: 600px) and (aspect-ratio: 3/4) {
+  .page {
+    background-image: url(../../imgs/appSkyM.png);
+  }
+
+  .mainTitle {
+    padding-bottom: 1rem;
+    font-size: 4.5rem;
+  }
+  .titleAndButton {
+    margin-top: 40px;
+    position: relative;
+    top: 10px;
+  }
+  .cloud {
+    width: 500px;
+    animation: floatCloud3 60s linear infinite;
+  }
+}
+
+@keyframes floatCloud3 {
+  0% {
+    left: -200px;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Very Large */
+
+@media (min-width: 1200px) {
+  .page {
+    max-width: 700px;
+  }
 }

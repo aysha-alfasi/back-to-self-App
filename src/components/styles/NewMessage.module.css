@@ -37,3 +37,26 @@
 
   }
   
+  @media (min-width: 768px) {
+
+    .section {
+      margin-top: 20%;
+ 
+  }
+
+  .highlightedText {
+  
+    font-size: 2.5rem;
+
+
+  }
+
+  }
+
+
+  @media (min-width: 1200px) {
+    .section {
+      margin-top: 10%;
+ 
+  }
+  }

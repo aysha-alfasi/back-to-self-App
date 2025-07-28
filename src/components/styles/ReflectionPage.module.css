@@ -67,3 +67,11 @@
 .okModal:hover {
   background-color: #6a4c93 !important;
 }
+
+
+
+@media (min-width: 1200px) {
+.writingArea {
+  margin-top: 5%;
+}
+}

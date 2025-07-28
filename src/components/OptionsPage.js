@@ -46,7 +46,6 @@ function OptionsPage({ setPage }) {
   }, [reflections]);
 
   const generateMessage = useCallback(() => {
-
     const today = new Date().toDateString();
     const savedDate = localStorage.getItem("dailyMessageDate");
     const savedMessage = localStorage.getItem("dailyMessage");
@@ -110,7 +109,12 @@ function OptionsPage({ setPage }) {
             animate={{ rotateY: 0, opacity: 1 }}
             exit={{ rotateY: 90, opacity: 0 }}
             transition={{ duration: 0.6, ease: "easeInOut" }}
-            style={{ perspective: 1000 }}
+            style={{
+              perspective: 1000,
+              transformStyle: "preserve-3d",
+              transformOrigin: "left",
+              backfaceVisibility: "hidden",
+            }}
           >
             <div className={classes.wrapper}>
               <div className={classes.buttons}>
