@@ -10,15 +10,14 @@
 }
 
 .modalContent {
-  margin-top: 10%;
+  margin-top: 0;
   width: 100%;
   max-width: 600px;
   max-height: 85vh;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: "Darumadrop One", sans-serif;
   background-color: #fffaf3;
   background-image: radial-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-
   background-size: 1.5em 1.5em;
   padding: 1.5rem;
   border-radius: 16px;
@@ -67,7 +66,7 @@
 }
 
 .modalBody :is(button, .modalButtons) {
-  margin-top: 3rem;
+  margin-top: 0.5rem;
   border-radius: 8px;
   background-color: #f7dfff;
   font-size: 1.1rem;
@@ -75,6 +74,7 @@
   padding: 6px 12px;
   min-width: 80px;
   margin-left: 10px;
+  padding-bottom: 1rem;
 }
 
 .modalBody :is(button, .modalButtons):hover {

@@ -150,6 +150,7 @@ setEditedText(newText);
                   contentEditable
                   ref={editRef}
                   data-placeholder="Edit your reflection..."
+                  data-testid="edit-area"
                   suppressContentEditableWarning={true}
                 />
                 <div className={classes.modalButtons}>

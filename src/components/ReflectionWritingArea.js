@@ -33,6 +33,7 @@ export default function ReflectionWritingArea({ onSave, goBack }) {
         contentEditable
         ref={contentRef}
         data-placeholder="Type here..."
+        data-testid="writing-area"
         suppressContentEditableWarning={true}
       />
 

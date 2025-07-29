@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { generateMessage as generateMessageUtil } from "../utils/generateMessage";
+
 import { AnimatePresence, motion } from "framer-motion";
 import DailyMessage from "./DailyMessage";
 import ReflectionSpace from "./ReflectionSpace";
@@ -46,18 +48,7 @@ function OptionsPage({ setPage }) {
   }, [reflections]);
 
   const generateMessage = useCallback(() => {
-    const today = new Date().toDateString();
-    const savedDate = localStorage.getItem("dailyMessageDate");
-    const savedMessage = localStorage.getItem("dailyMessage");
-
-    if (savedDate === today && savedMessage) {
-      setDailyMessage(savedMessage);
-    } else {
-      const random = messages[Math.floor(Math.random() * messages.length)];
-      setDailyMessage(random);
-      localStorage.setItem("dailyMessage", random);
-      localStorage.setItem("dailyMessageDate", today);
-    }
+    generateMessageUtil(messages, localStorage, setDailyMessage);
   }, []);
 
   const saveReflection = (text) => {
@@ -67,7 +58,7 @@ function OptionsPage({ setPage }) {
         text: text.trim(),
         date: new Date().toLocaleDateString(),
       };
-      setReflections([...reflections, newEntry]);
+      setReflections([newEntry, ...reflections]);
     }
   };
 
