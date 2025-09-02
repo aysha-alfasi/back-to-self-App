@@ -32,7 +32,7 @@ My project is a react cozy web application that feels like opening your own pers
 - Generate a unique *Message of the Day* that refreshes daily.💌  
 - Write your own reflections.🖊️  
 - View all your reflections.📖  
-- Edit or delete reflections easily.
+- Edit or delete reflections easily.💭
 - Local storage keeps your reflections safe in your browser.💾  
 - Enjoy smooth page-turn animations and calming paper-flip sounds.🍃✨  
 
