@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import classes from "../components/styles/CoverPage.module.css";
+import appSky from '../imgs/appSky.png';
 import flowers from "../imgs/mainPageFlowers.png";
 import cloud from "../imgs/cloud3.png";
 
@@ -14,7 +15,7 @@ function CoverPage({ onDiveIn }) {
 
   // Preload images <♡ />
   useEffect(() => {
-    const images = [cloud, flowers];
+    const images = [cloud, flowers, appSky];
     let loadedCount = 0;
 
     images.forEach((src) => {
