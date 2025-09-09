@@ -1,13 +1,6 @@
-import { useEffect } from "react";
 import classes from "../components/styles/NewMessage.module.css";
 
-export default function DailyMessage({ dailyMessage, generateMessage }) {
-
-  useEffect(() => {
-    generateMessage();
-  }, [generateMessage]);
-  
-
+export default function DailyMessage({ dailyMessage }) {
   return (
     <div className={classes.section}>
       {dailyMessage ? (

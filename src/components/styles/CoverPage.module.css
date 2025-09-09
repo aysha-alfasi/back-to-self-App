@@ -14,11 +14,23 @@
   animation-delay: 0.3s;
 }
 
+
 @keyframes fadeInBg {
   to {
     opacity: 1;
   }
 }
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+text-align: center;
+  font-size: 1.5rem;
+  color: #d178e1;
+  font-family: "Darumadrop One", cursive;
+} 
 
 .mainTitle {
   font-family: "Darumadrop One", cursive;

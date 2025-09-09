@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from "react";
-import { generateMessage as generateMessageUtil } from "../utils/generateMessage";
-
+import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useDailyMessage } from "../hooks/useDailyMessage";
 import DailyMessage from "./DailyMessage";
 import ReflectionSpace from "./ReflectionSpace";
 import ViewReflections from "./ViewReflections";
 import classes from "../components/styles/OptionsPage.module.css";
+
 
 const messages = ["You are enough!", "Stay present", "Be kind today!"];
 
@@ -21,8 +21,12 @@ const playPageCloseSound = () => {
 
 function OptionsPage({ setPage }) {
   const [view, setView] = useState("home");
-  const [dailyMessage, setDailyMessage] = useState("");
   const [reflections, setReflections] = useState([]);
+
+    const dailyMessage = useDailyMessage(messages); // The hook <♡ 
+
+  const isFirstRender = useRef(true);
+
 
   useEffect(() => {
     if (!isFirstRender.current) {
@@ -30,7 +34,6 @@ function OptionsPage({ setPage }) {
     }
   }, [view]);
 
-  const isFirstRender = useRef(true);
 
   useEffect(() => {
     const storedReflections = localStorage.getItem("reflections");
@@ -47,9 +50,6 @@ function OptionsPage({ setPage }) {
     localStorage.setItem("reflections", JSON.stringify(reflections));
   }, [reflections]);
 
-  const generateMessage = useCallback(() => {
-    generateMessageUtil(messages, localStorage, setDailyMessage);
-  }, []);
 
   const saveReflection = (text) => {
     if (text.trim()) {
@@ -153,7 +153,6 @@ function OptionsPage({ setPage }) {
           >
             <DailyMessage
               dailyMessage={dailyMessage}
-              generateMessage={generateMessage}
               goBack={goBack}
             />
           </motion.div>
